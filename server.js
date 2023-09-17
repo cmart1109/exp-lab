@@ -1,33 +1,13 @@
 const express = require("express");
 const app = express();
 const port = 8000;
-const info = [
-    {
-        id: "123456",
-        isCompleted: false,
-        description: "Walk the dog",
-    },
-    {
-        id: "123457",
-        isCompleted: false,
-        description: "Make the dinner",
-    },
-    {
-        id: "134545",
-        isCompleted: true,
-        description: "Clean the Bathroom",
-    },
-    {
-        id: "654322",
-        isCompleted: false,
-        description: "ADA School Homework",
-    },
-    {
-        id: "659142",
-        isCompleted: true,
-        description: "Go to the Grocery Store",
-    }
-];
+const info = require('./lista-tareas')
+const infoRouter = require('./list-view.router')
+const editInfoRouter = require('./list-edit.router')
+app.use(express.json());
+
+app.use("/tareas", infoRouter);
+app.use("/editar", editInfoRouter);
 
 const jsonData = JSON.stringify(info);
 
