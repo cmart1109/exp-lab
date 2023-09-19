@@ -1,0 +1,9 @@
+RUTAS PARA USAR EN POSTMAN 
+
+Ver la lista - http://localhost:8000/tareas
+Tareas completadas - http://localhost:8000/tareas/completas
+Tareas imcompletas - http://localhost:8000/tareas/incompletas
+Agragar tarea - http://localhost:8000/editar/agregar/
+Eliminar tarea - http://localhost:8000/editar/123456
+Completar tarea - http://localhost:8000/editar/completar/123456
+

@@ -20,13 +20,19 @@ editInfoRouter
     })
 })
 
-.delete('/eliminar/:id', (req,res) => {
-    let id = parseInt(req.params.id)
-    let tareaBorrar = id
+.delete('/eliminar/:id', (req, res) => {
+    const id = parseInt(req.params.id)
     funciones.borrarTarea(id)
-    res.send(`La tarea con id ${id} fue borrada con exito`)
+    res.send(`La tarea con id ${id} fue borrada con éxito`)
 })
 
-
-
+.post('/completar/:id', (req, res) => {
+    let id = req.params.id;
+    const tareaCompletada = funciones.marcarTareaComoCompletada(id);
+    if (tareaCompletada) {
+        res.status(200).json({ message: `Tarea con ID ${id} marcada como completada` });
+    } else {
+        res.status(404).json({ message: `No se encontró ninguna tarea con ID ${id}` });
+    }
+});
 module.exports = editInfoRouter;

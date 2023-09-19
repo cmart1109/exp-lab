@@ -5,9 +5,18 @@ function agregarTarea(nuevaTarea) {
 };
 
 function borrarTarea(tareaBorrar) {
-    let nuevaLista = info.filter((infos) => infos.id !== tareaBorrar)
+    let nuevaLista = info.filter((item) => item.id !== tareaBorrar)
     info = nuevaLista;
-};
+}
+
+function marcarTareaComoCompletada(id) {
+    const tarea = info.find((item) => item.id === id);
+    if (tarea) {
+        tarea.isCompleted = true;
+        return true; 
+    }
+    return false; 
+}
 
 
 
@@ -20,10 +29,4 @@ function borrarTarea(tareaBorrar) {
 
 
 
-
-
-
-
-
-
-module.exports = {agregarTarea, borrarTarea};
+module.exports = {agregarTarea, borrarTarea, marcarTareaComoCompletada};
