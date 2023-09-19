@@ -21,7 +21,6 @@ editInfoRouter
 })
 
 .delete('/eliminar/:id', (req, res) => {
-    const id = parseInt(req.params.id)
     funciones.borrarTarea(id)
     res.send(`La tarea con id ${id} fue borrada con éxito`)
 })

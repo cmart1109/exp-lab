@@ -18,15 +18,4 @@ function marcarTareaComoCompletada(id) {
     return false; 
 }
 
-
-
-
-
-
-
-
-
-
-
-
 module.exports = {agregarTarea, borrarTarea, marcarTareaComoCompletada};
