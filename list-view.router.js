@@ -5,15 +5,6 @@ const info = require('./lista-tareas');
 
 infoRouter
 
-.use('/', (req,res,next)=> {
-    if (req.method === 'GET') {
-    res.send('Metodo valido')
-    next()        
-    } else {
-        return res.status(400).send('La solicitud con esta ruta no es valida')
-    }
-})
-
 
 .get("/",(req,res)=> {
     res.json(info)
@@ -27,6 +18,15 @@ infoRouter
 .get('/incompletas', (req,res) => {
     let tareasIncompletas = info.filter((item)=> item.isCompleted === false);
     res.json(tareasIncompletas);
+})
+
+.use('/', (req,res,next)=> {
+    if (req.method === 'GET') {
+    res.send('Metodo valido')
+    next()        
+    } else {
+        return res.status(400).send('La solicitud con esta ruta no es valida')
+    }
 })
 
 module.exports = infoRouter;
