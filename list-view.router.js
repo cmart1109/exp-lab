@@ -21,6 +21,14 @@ infoRouter
     res.json(tareasIncompletas);
 })
 
+
+.get('/:id', (req,res) => {
+    let id = req.params.id
+    let tareaSolo = info.filter((item)=> item.id === id);
+    res.json(tareaSolo);
+})
+
+
 .use('/', (req,res,next)=> {
     if (req.method === 'GET') {
     res.send('Metodo valido')
