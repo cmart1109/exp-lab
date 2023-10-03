@@ -1,3 +1,6 @@
+//======================== LISTA DE TAREAS DE EXPRESS =================================================
+
+// Variables requeridas====================
 const express = require("express");
 const app = express();
 const port = 8000;
@@ -5,19 +8,17 @@ const info = require('./lista-tareas')
 const jwt = require("jsonwebtoken")
 const infoRouter = require('./list-view.router')
 const editInfoRouter = require('./list-edit.router')
+const secretKey = 'mortadela'; 
+const jsonData = JSON.stringify(info);
+const usuarios = require('./usuarios')
+//===============================================
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
-const secretKey = 'mortadela'; 
 
 
-const usuarios = [
-    {usuario:"Christian", clave: "mortadela3"},
-    {usuario: "Jimena", clave: "txt2009"}
-];       
-
+// Validacion de las rutas que se mandan
 app.use((req, res, next) => {
     const metodosValidos = ['GET', 'POST', 'PUT', 'DELETE'];
-
     if (metodosValidos.includes(req.method)) {
         next();
     } else {
@@ -25,13 +26,13 @@ app.use((req, res, next) => {
     }
 });
 
+//uso de dos routers para poder acceder a distintas listas de tareas
 app.use("/tareas", validateToken, infoRouter);
 app.use("/editar", validateToken, editInfoRouter);
 
 
-const jsonData = JSON.stringify(info);
-
-app.post("/auth", (req,res) => {
+// Autenticacion
+app.post("/login", (req,res) => {
     const {usuario, clave} = req.body;
     if (usuario === "christian" && clave === "mortadela") {
         const user = {usuario: usuario};
@@ -49,6 +50,7 @@ function generateAccessToken(user) {
     return jwt.sign(user, secretKey,{ expiresIn: '30m' });
 }
 
+// Validacion ======================================================
 
 function validateToken(req,res,next) {
    const accessToken = req.headers["authorization"];
@@ -63,8 +65,10 @@ function validateToken(req,res,next) {
    }) 
 };
 
-app.get('/', validateToken, (req,res) => {
-    res.json(info)
+//==============================================================================================
+
+app.get('/', (req,res) => {
+    res.json("Bienvenido a tu lista de tareas, por favor ingresa tus credenciales para tener mas informacion")
 })
 
     app.listen(port, () => {

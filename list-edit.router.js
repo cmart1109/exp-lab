@@ -38,12 +38,16 @@ editInfoRouter
 
 .post('/agregar', (req,res) => {
     const nuevaTarea = req.body;
+if (!nuevaTarea) {
+    res.send({message: "El cuerpo de la solicitud no es valido"})
+} else {
     funciones.agregarTarea(nuevaTarea);
     res.json({
         status:200,
         data: nuevaTarea,
         message:'Nueva tarea agregada al sistema'
     })
+}
 })
 
 .delete('/eliminar/:id', (req, res) => {
