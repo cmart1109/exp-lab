@@ -3,6 +3,7 @@ const app = express
 const editInfoRouter = express.Router();
 const info = require('./lista-tareas');
 const funciones = require('./funciones')
+const server = require("./server")
 
 editInfoRouter
 
@@ -11,7 +12,7 @@ editInfoRouter
 })
 
 // Middleware para verificar que las solicitudes no esten vacias
-.use('/agregar', (req, res, next) => {
+.use('/agregar',  (req, res, next) => {
     if (req.method === 'POST') {
         if (!req.body || Object.keys(req.body).length === 0) {
             return res.status(400).send('El cuerpo de la solicitud esta vacio.');
@@ -45,7 +46,7 @@ editInfoRouter
     })
 })
 
-.delete('/eliminar/:id', (req, res) =>
+.delete('/eliminar/:id', (req, res) => {
     funciones.borrarTarea(id)
     res.send(`La tarea con id ${id} fue borrada con éxito`)
 })

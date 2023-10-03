@@ -2,6 +2,7 @@ const express = require("express");
 const app = express
 const infoRouter = express.Router();
 const info = require('./lista-tareas');
+const server = require("./server")
 
 infoRouter
 
@@ -10,7 +11,7 @@ infoRouter
     res.json(info)
 })
 
-.get('/completas', (req,res) => {
+.get('/completas',  (req,res) => {
     let tareasCompletas = info.filter((item)=> item.isCompleted === true);
     res.json(tareasCompletas);
 })
